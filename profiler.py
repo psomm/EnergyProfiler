@@ -91,8 +91,13 @@ if __name__ == "__main__":
                                 periods=resolution, freq=freq))
 
     energy_profile = EnergyDemandProfile(2010, temperature_data, holidays)
+
+    # example profiles: param building_type > 0
     demand['efh'] = energy_profile.create_heat_demand_profile('efh', 1, 0, 1, 20000)
     demand['mfh'] = energy_profile.create_heat_demand_profile('mfh', 1, 0, 1, 20000)
+    # except for the classes 'efh' and 'mfh', the building type parameter has to be '0'
+    demand['gmk'] = energy_profile.create_heat_demand_profile('gmk', 1, 0, 1, 20000)
+    demand['gha'] = energy_profile.create_heat_demand_profile('gha', 1, 0, 1, 20000)
 
     # power_demand = energy_profile.create_power_demand_profile({'g0':3000})
     # power_demand = power_demand.resample('H').mean()
