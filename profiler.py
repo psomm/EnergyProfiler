@@ -12,14 +12,14 @@ class EnergyDemandProfile:
         self.temperature = temperature_data
         self.holidays = holidays
         self.demand_time_series = pd.date_range(start=datetime.datetime(year, 1, 1, 0),
-                                end=datetime.datetime(year, 12, 31, 23),
-                                freq='H')
+                                                end=datetime.datetime(year, 12, 31, 23),
+                                                freq='H')
 
     def create_heat_demand_profile(self, building_type, building_class, wind_class, ww_incl, annual_heat_demand):
         heat_demand = bdew.HeatBuilding(self.demand_time_series, holidays=self.holidays, temperature=self.temperature,
-                                          shlp_type=building_type, building_class=building_class, 
-                                          wind_class=wind_class, ww_incl=ww_incl, annual_heat_demand=annual_heat_demand, 
-                                          name=building_type).get_bdew_profile()
+                                        shlp_type=building_type, building_class=building_class, 
+                                        wind_class=wind_class, ww_incl=ww_incl, annual_heat_demand=annual_heat_demand, 
+                                        name=building_type).get_bdew_profile()
         
         return heat_demand
     
@@ -96,8 +96,8 @@ if __name__ == "__main__":
     demand['efh'] = energy_profile.create_heat_demand_profile('efh', 1, 0, 1, 20000)
     demand['mfh'] = energy_profile.create_heat_demand_profile('mfh', 1, 0, 1, 20000)
     # except for the classes 'efh' and 'mfh', the building type parameter has to be '0'
-    demand['gmk'] = energy_profile.create_heat_demand_profile('gmk', 1, 0, 1, 20000)
-    demand['gha'] = energy_profile.create_heat_demand_profile('gha', 1, 0, 1, 20000)
+    demand['gmk'] = energy_profile.create_heat_demand_profile('gmk', 0, 0, 1, 20000)
+    demand['gha'] = energy_profile.create_heat_demand_profile('gha', 0, 0, 1, 20000)
 
     # power_demand = energy_profile.create_power_demand_profile({'g0':3000})
     # power_demand = power_demand.resample('H').mean()
